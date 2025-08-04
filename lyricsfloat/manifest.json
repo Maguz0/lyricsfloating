@@ -1,8 +1,8 @@
 {
-  "name": "LyricsFloat",
-  "description": "Visualización de letras tipo Apple Music flotantes",
+  "name": "LyricsFloating",
+  "description": "Letras flotantes estilo Apple Music",
   "main": "index.js",
-  "author": "https://github.com/Maguz0",
+  "author": "Maguz0",
   "version": "1.0.0",
   "icon": "icon.png"
 }
