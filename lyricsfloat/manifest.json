@@ -3,5 +3,6 @@
   "description": "Visualización de letras tipo Apple Music flotantes",
   "main": "index.js",
   "author": "https://github.com/Maguz0",
-  "version": "1.0.0 (beta)"
+  "version": "1.0.0",
+  "icon": "icon.png"
 }
