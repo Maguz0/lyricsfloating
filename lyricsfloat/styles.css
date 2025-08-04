@@ -1,3 +1,4 @@
+/* RESET y fuentes base */
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +6,7 @@ body {
   font-family: "Spotify Circular", "Circular Std", system-ui, sans-serif;
 }
 
+/* Caja flotante para letras */
 .lyrics-box {
   position: fixed;
   bottom: 50px;
@@ -21,4 +23,26 @@ body {
   white-space: nowrap;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease;
+}
+
+/* Animación suave de entrada */
+.lyrics-box.fade-in {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+/* Keyframes para animación */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Texto provisional cuando está vacío */
+.lyrics-box:empty::before {
+  content: "🎶 Letra flotante aparecerá aquí...";
+  opacity: 0.5;
 }
