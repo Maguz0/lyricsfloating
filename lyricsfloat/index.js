@@ -1,4 +1,19 @@
 (async function lyricsFloatApp() {
+  // Espera a que Spicetify esté listo
+  if (!Spicetify?.Player || !Spicetify?.Platform) {
+    setTimeout(lyricsFloatApp, 300);
+    return;
+  }
+
+  // Verifica que el contenedor esté en el DOM
+  const lyricsContainer = document.getElementById("lyrics");
+
+  if (!lyricsContainer) {
+    console.warn("🚫 No se encontró el elemento con ID 'lyrics'.");
+    return;
+  }
+
+  // Extrae metadata de la canción actual
   const track = Spicetify.Player.data.track;
   const metadata = {
     title: track.name,
@@ -7,11 +22,9 @@
     album: track.album.name
   };
 
-  console.log("🎵 Metadata:", metadata); // Útil para verificar en la consola
+  console.log("🎵 Metadata:", metadata);
 
-  // Aquí podrías usar metadata para buscar letras
-  const lyricsContainer = document.getElementById("lyrics");
-
+  // Letras de ejemplo (puedes reemplazar esto con letras reales desde una API)
   function getLyricsMock() {
     return [
       { time: 0, text: `${metadata.title} - ${metadata.artist}` },
@@ -20,13 +33,13 @@
     ];
   }
 
+  // Sincroniza la letra con el tiempo de la canción
   function syncLyrics() {
     const lyrics = getLyricsMock();
     let index = 0;
-    const audio = Spicetify.Player;
 
     const interval = setInterval(() => {
-      const currentTime = audio.getProgress() / 1000;
+      const currentTime = Spicetify.Player.getProgress() / 1000;
       if (index < lyrics.length && currentTime >= lyrics[index].time) {
         lyricsContainer.innerText = lyrics[index].text;
         index++;
@@ -34,5 +47,6 @@
     }, 500);
   }
 
-  document.addEventListener("DOMContentLoaded", syncLyrics);
+  // Lanza el sincronizador
+  syncLyrics();
 })();
